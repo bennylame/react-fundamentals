@@ -8,9 +8,13 @@ function UsernameForm({onSubmitUsername}) {
   // 💰 Make sure to accept the `event` as an argument and call
   // `event.preventDefault()` to prevent the default behavior of form submit
   // events (which refreshes the page).
+
+  const usernameInputRef = React.useRef()
+
   const handleSubmit = event => {
     event.preventDefault()
-    onSubmitUsername(event.target.elements.usernameInput.value)
+    let value = usernameInputRef.current.value
+    onSubmitUsername(value)
   }
 
   // 🐨 get the value from the username input (using whichever method
@@ -26,7 +30,7 @@ function UsernameForm({onSubmitUsername}) {
     <form onSubmit={handleSubmit}>
       <div>
         <label>Username:</label>
-        <input type="text" id="usernameInput" />
+        <input ref={usernameInputRef} type="text" id="usernameInput" />
       </div>
       <button type="submit">Submit me if you can</button>
     </form>
